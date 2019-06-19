@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MediaPublisher mediaPublisher;
     private boolean isStarted;
     private boolean isRtmpConnected = false;
-    private static final String rtmpUrl = "rtmp://192.168.1.101:1935/zhongjihao/myh264";
+    private static final String rtmpUrl = "rtmp://publish.lvmengya.com/lvshang/ls";
     private boolean hasPermission;
     private static final int TARGET_PERMISSION_REQUEST = 100;
 
@@ -61,8 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnStart.setOnClickListener(this);
 
         String logPath = Environment
-                .getExternalStorageDirectory()
-                + "/" + "zhongjihao/rtmp.log";
+                .getExternalStorageDirectory() + "/watermark.bmp";
         mediaPublisher = MediaPublisher.newInstance(rtmpUrl,logPath);
         mediaPublisher.setRtmpConnectCb(this);
         mediaPublisher.initMediaPublish();
@@ -161,14 +160,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onConnectRtmp(final int ret) {
         isRtmpConnected = ret == 0 ? false : true;
-        if(ret != 0){
-            //采集音频
-            mediaPublisher.startAudioGather();
-            //初始化音频编码器
-            mediaPublisher.initAudioEncoder();
-            //启动编码
-            mediaPublisher.startEncoder();
-        }
+//        if(ret != 0){
+//            //采集音频
+//            mediaPublisher.startAudioGather();
+//            //初始化音频编码器
+//            mediaPublisher.initAudioEncoder();
+//            //启动编码
+//            mediaPublisher.startEncoder();
+//        }
         runOnUiThread(new Runnable(){
             @Override
             public void run() {
